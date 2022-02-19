@@ -17,7 +17,7 @@ build majorly to stream data from kobotoolbox.org.}
  to construct a URL used to fetch data. The fetch data
  from a given form login to the server and click the form
  and navigate the the form tab. From the link, the text
- between forward slash(after "forms") and before landing.
+ between forward slash(/)(after "forms" and before "landing").
  For example,
 https://kf.kobotoolbox.org/#/forms/aTxwr9Fg4ouTYnRN5tHq2z/landing
 formid='aTxwr9Fg4ouTYnRN5tHq2z'}
