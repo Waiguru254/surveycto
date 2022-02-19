@@ -8,12 +8,13 @@
 #' identifier. It imports data in .csv format, without repeat group data.
 #'
 #' @param servername  SurveyCTO servername
-#' @param formid      Get this from Setting sheet in the XLSForm workbook
+#' @param formid      Get this from Setting sheet in the XLSForm workbook or in
+#'                     the form definition in the server.
 #' @param username    SurveyCTO username, without including  the .survecto.com
 #'
 #' @param password    SurveyCTO password, it is encouraged not to put the
-#'                    password in a plain text in you script. Employ .Renviron
-#'                    files to hide your passwords.
+#'                    password in a plain text in your script. Employ it in
+#'                     .Renviron files to hide your passwords.
 
 #'
 #' @return

@@ -3,6 +3,7 @@
 export(ctoimport)
 export(koboimport)
 export(odkmean)
+export(redimport)
 export(rodkmult)
 export(rodkmultlab)
 export(rodksinglelab)

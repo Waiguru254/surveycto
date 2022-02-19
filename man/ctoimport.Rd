@@ -9,13 +9,14 @@ ctoimport(servername, formid, username, password)
 \arguments{
 \item{servername}{SurveyCTO servername}
 
-\item{formid}{Get this from Setting sheet in the XLSForm workbook}
+\item{formid}{Get this from Setting sheet in the XLSForm workbook or in
+the form definition in the server.}
 
 \item{username}{SurveyCTO username, without including  the .survecto.com}
 
 \item{password}{SurveyCTO password, it is encouraged not to put the
-password in a plain text in you script. Employ .Renviron
-files to hide your passwords.}
+password in a plain text in your script. Employ it in
+ .Renviron files to hide your passwords.}
 }
 \value{
 
