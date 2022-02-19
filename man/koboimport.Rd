@@ -2,14 +2,25 @@
 % Please edit documentation in R/koboimport.R
 \name{koboimport}
 \alias{koboimport}
-\title{Importing data from Kobo tool box (even Humanitarian Account)}
+\title{Importing data from Kobo tool box (even Humanitarian Account)
+KoBoToolBox provides a suites of tools to collect data in challenging
+environment. It is free and opne source and work both online and offline.}
 \usage{
 koboimport(servername, formid, username, password)
 }
 \arguments{
-\item{servername}{either 'https://kobo.humanitarianresponse.info/' or 'kc.kobotoolbox.org'}
+\item{servername}{either 'kobo.humanitarianresponse.info/' or
+'kc.kobotoolbox.org' However, the current function is
+build majorly to stream data from kobotoolbox.org.}
 
-\item{formid}{Click the form and copy forms/"formid"/landing}
+\item{formid}{To download data, a unique identifier of the form is needed
+ to construct a URL used to fetch data. The fetch data
+ from a given form login to the server and click the form
+ and navigate the the form tab. From the link, the text
+ between forward slash(after "forms") and before landing.
+ For example,
+https://kf.kobotoolbox.org/#/forms/aTxwr9Fg4ouTYnRN5tHq2z/landing
+formid='aTxwr9Fg4ouTYnRN5tHq2z'}
 
 \item{username}{your username}
 
@@ -19,9 +30,14 @@ koboimport(servername, formid, username, password)
 
 }
 \description{
-Importing data from Kobo tool box (even Humanitarian Account)
+KoboTool Box also provides advanced feature and make it useful in
+advanced scenarios.It provide data access through RESTAPI, which
+automte the workflow of data colelection, processing and visualization.
+This is possible even the project is no public, using username and
+password authentication.
 }
 \examples{
+###Not run
 data<-koboimport(servername,form_id,username,password)
 
 }

@@ -1,8 +1,26 @@
 ### Importing data function
 #' Importing data from Kobo tool box (even Humanitarian Account)
+#' KoBoToolBox provides a suites of tools to collect data in challenging
+#' environment. It is free and opne source and work both online and offline.
 #'
-#' @param servername either 'https://kobo.humanitarianresponse.info/' or 'kc.kobotoolbox.org'
-#' @param formid  Click the form and copy forms/"formid"/landing
+#' KoboTool Box also provides advanced feature and make it useful in
+#' advanced scenarios.It provide data access through RESTAPI, which
+#' automte the workflow of data colelection, processing and visualization.
+#' This is possible even the project is no public, using username and
+#' password authentication.
+#'
+#' @param servername either 'kobo.humanitarianresponse.info/' or
+#'                  'kc.kobotoolbox.org' However, the current function is
+#'                  build majorly to stream data from kobotoolbox.org.
+#'
+#' @param formid  To download data, a unique identifier of the form is needed
+#'                   to construct a URL used to fetch data. The fetch data
+#'                   from a given form login to the server and click the form
+#'                   and navigate the the form tab. From the link, the text
+#'                   between forward slash(/)(after "forms" and before "landing").
+#'                   For example,
+#'                  https://kf.kobotoolbox.org/#/forms/aTxwr9Fg4ouTYnRN5tHq2z/landing
+#'                  formid='aTxwr9Fg4ouTYnRN5tHq2z'
 #' @param username your username
 #' @param password you password
 #'
@@ -10,6 +28,7 @@
 #' @export
 #'
 #' @examples
+#' ###Not run
 #' data<-koboimport(servername,form_id,username,password)
 #'
   koboimport<- function (servername,formid, username,password) {

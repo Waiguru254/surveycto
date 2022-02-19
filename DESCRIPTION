@@ -5,13 +5,18 @@ Version: 0.1.0
 Author@R: c(person("Waiguru Muiruki", email="waigurusamuel@gmail.com"
 Maintainer: The package maintainer <waigurusamuel@gmail.com>
 Description: SurveyCTO package is a metapackages that is comprised of 
-             specilized function to organize, manipulate and analyze
-             data collected through platform that use XLSFORM compliant
-             platforms such as SurveyCTO,ODK, ONA,Kobotoolbox.However, 
-             some function(s) may be used with any structured.  The main
-             is to develop live dashboard during data collection.
-             There are functions to add value labels for both multiple 
-             and single variables from XLSFORM.
+             specilized functions to organize, manipulate and analyze
+             data collected through XLSFOrm-compliant platforms
+             such as SurveyCTO,ODK, ONA,Kobotoolbox.However,some 
+             function(s) may be used with any structured.This system 
+             provides an enormous opportunity in automation of the workflow
+             of survey data collection, processing, analsysis and 
+             visualization. The main purpose this package is to compile
+             functions that can be used to develop live dashboard(s)
+             during data collection. This make it easy to track data
+             quality during data collection and also gives data manager(s)
+             time to discover insights in the data. Using the functions 
+             in this package it relative easy to develop shiny dashboards.
 License: GPL (>= 2)
 Encoding: UTF-8
 LazyData: true
