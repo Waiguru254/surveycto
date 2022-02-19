@@ -3,15 +3,15 @@
 \name{koboimport}
 \alias{koboimport}
 \title{Importing data from Kobo tool box (even Humanitarian Account)
-KoBoToolBox provides a suites of tools to collect data in challenging
-environment. It is free and opne source and work both online and offline.}
+      KoBoToolBox provides a suites of tools to collect data in challenging
+      environment. It is free and opne source and work both online and offline.}
 \usage{
 koboimport(servername, formid, username, password)
 }
 \arguments{
 \item{servername}{either 'kobo.humanitarianresponse.info/' or
 'kc.kobotoolbox.org' However, the current function is
-build majorly to stream data from kobotoolbox.org.}
+largely build to stream data from kobotoolbox.org.}
 
 \item{formid}{To download data, a unique identifier of the form is needed
  to construct a URL used to fetch data. The fetch data
