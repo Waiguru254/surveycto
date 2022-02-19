@@ -2,7 +2,7 @@
 % Please edit documentation in R/ctoimport.R
 \name{ctoimport}
 \alias{ctoimport}
-\title{Importing Data from SurveyCTO server}
+\title{Fetching Data from SurveyCTO server}
 \usage{
 ctoimport(servername, formid, username, password)
 }
@@ -11,15 +11,18 @@ ctoimport(servername, formid, username, password)
 
 \item{formid}{Get this from Setting sheet in the XLSForm workbook}
 
-\item{username}{SurveyCTO username}
+\item{username}{SurveyCTO username, without including  the .survecto.com}
 
-\item{password}{SurveyCTO password}
+\item{password}{SurveyCTO password, it is encouraged not to put the
+password in a plain text in you script. Employ .Renviron
+files to hide your passwords.}
 }
 \value{
 
 }
 \description{
-Importing Data from SurveyCTO server
+The function fetch data from surveycto server using formid, which is a form
+identifier. It imports data in .csv format, without repeat group data.
 }
 \examples{
 ctoimport('servername','formid','username','password')

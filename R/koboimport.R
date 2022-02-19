@@ -1,13 +1,15 @@
 ### Importing data function
-#' Importing data from Kobo tool box (even Humanitarian Account)
-#'       KoBoToolBox provides a suites of tools to collect data in challenging
-#'       environment. It is free and opne source and work both online and offline.
 #'
-#' KoboTool Box also provides advanced feature and make it useful in
-#' advanced scenarios.It provide data access through RESTAPI, which
-#' automte the workflow of data colelection, processing and visualization.
-#' This is possible even the project is no public, using username and
-#' password authentication.
+#'Importing data from KoboToolBox (even Humanitarian)
+#'
+#'
+#'KoBoToolBox provides a suites of tools to collect data in challenging
+#'environment. It is free and opne source and work both online and offline.
+#'KoboTool Box also provides advanced feature and make it useful in
+#'advanced scenarios.It provide data access through RESTAPI, which
+#'automte the workflow of data colelection, processing and visualization.
+#'This is possible even the project is no public, using username and
+#'password authentication.
 #'
 #' @param servername either 'kobo.humanitarianresponse.info/' or
 #'                  'kc.kobotoolbox.org' However, the current function is
@@ -18,8 +20,7 @@
 #'                   from a given form login to the server and click the form
 #'                   and navigate the the form tab. From the link, the text
 #'                   between forward slash(/)(after "forms" and before "landing").
-#'                   For example,
-#'                  https://kf.kobotoolbox.org/#/forms/aTxwr9Fg4ouTYnRN5tHq2z/landing
+#'                   For example, https://kf.kobotoolbox.org/#/forms/aTxwr9Fg4ouTYnRN5tHq2z/landing
 #'                  formid='aTxwr9Fg4ouTYnRN5tHq2z'
 #' @param username your username
 #' @param password you password
@@ -32,6 +33,34 @@
 #' data<-koboimport(servername,form_id,username,password)
 #'
   koboimport<- function (servername,formid, username,password) {
+
+    ### Confirming that all the details are entered
+
+    ##servername
+    if (servername=="") {
+
+      stop(paste("Enter the servername."), call. = FALSE)
+
+    }
+
+    ##formid
+
+    if (formid=="") {
+
+      stop(paste("Enter the formid"), call. = FALSE)
+
+    }
+
+    ###Username
+
+    if (username=="") {
+      stop(paste("Enter the username"), call. = FALSE)
+    }
+
+
+    if (password=="") {
+      stop(paste("Enter the password"), call. = FALSE)
+    }
 
     ### Loading dplyr, which is used in this function.
     suppressMessages(library(dplyr))

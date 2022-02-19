@@ -2,9 +2,7 @@
 % Please edit documentation in R/koboimport.R
 \name{koboimport}
 \alias{koboimport}
-\title{Importing data from Kobo tool box (even Humanitarian Account)
-      KoBoToolBox provides a suites of tools to collect data in challenging
-      environment. It is free and opne source and work both online and offline.}
+\title{Importing data from KoboToolBox (even Humanitarian)}
 \usage{
 koboimport(servername, formid, username, password)
 }
@@ -18,8 +16,7 @@ largely build to stream data from kobotoolbox.org.}
  from a given form login to the server and click the form
  and navigate the the form tab. From the link, the text
  between forward slash(/)(after "forms" and before "landing").
- For example,
-https://kf.kobotoolbox.org/#/forms/aTxwr9Fg4ouTYnRN5tHq2z/landing
+ For example, https://kf.kobotoolbox.org/#/forms/aTxwr9Fg4ouTYnRN5tHq2z/landing
 formid='aTxwr9Fg4ouTYnRN5tHq2z'}
 
 \item{username}{your username}
@@ -30,6 +27,8 @@ formid='aTxwr9Fg4ouTYnRN5tHq2z'}
 
 }
 \description{
+KoBoToolBox provides a suites of tools to collect data in challenging
+environment. It is free and opne source and work both online and offline.
 KoboTool Box also provides advanced feature and make it useful in
 advanced scenarios.It provide data access through RESTAPI, which
 automte the workflow of data colelection, processing and visualization.
