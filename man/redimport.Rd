@@ -7,10 +7,10 @@
 redimport(token, url)
 }
 \arguments{
-\item{token}{The is unique identifier of projects in RedCap.
+\item{token}{This is the unique identifier of projects in RedCap.
 This function uses the token to fetch data using API.}
 
-\item{url}{This the API link into the Redcap API. An example is
+\item{url}{This is the link to the Redcap API. An example is
 'https://redcap.xxxxxxxx/api/'}
 }
 \value{
