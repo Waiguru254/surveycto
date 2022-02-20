@@ -1,8 +1,8 @@
 #' Fetching data from Project's RedCap server
 #'
-#' @param token The is unique identifier of projects in RedCap.
+#' @param token This is the unique identifier of projects in RedCap.
 #'              This function uses the token to fetch data using API.
-#' @param url   This the API link into the Redcap API. An example is
+#' @param url   This is the link to the Redcap API. An example is
 #'              'https://redcap.xxxxxxxx/api/'
 #'
 #'
@@ -39,12 +39,12 @@
     ### Creating the components for fetching
 
     post_body <- list(
-      token           = token,
-      content         = 'record',
-      format          = 'csv',
-      type            = 'flat',
-      records         = records_collapsed,
-      fields          = fields_collapsed
+                      token           = token,
+                      content         = 'record',
+                      format          = 'csv',
+                      type            = 'flat',
+                      records         = records_collapsed,
+                      fields          = fields_collapsed
     )
 
     ### Fetching the data
