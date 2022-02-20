@@ -57,7 +57,7 @@
 
     ### Printing the number of submission(s) download form the server
 
-    cat(crayon::green(paste(nrow(data_cto),"submissions of",token, " proect have been downloaded.",sep=' ')))
+    cat(crayon::green(paste(nrow(data_cto),"submissions of",gsub(str_sub(token,8,24),"********",token), " proect have been downloaded.",sep=' ')))
 
 
     ###Returning the data to r
