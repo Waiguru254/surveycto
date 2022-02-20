@@ -1,4 +1,4 @@
-#' Fetching data from Project's RedCap server
+#' Fetching data from Project's RedCap server using API
 #'
 #' @param token This is the unique identifier of projects in RedCap.
 #'              This function uses the token to fetch data using API.

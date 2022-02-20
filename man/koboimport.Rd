@@ -2,7 +2,7 @@
 % Please edit documentation in R/koboimport.R
 \name{koboimport}
 \alias{koboimport}
-\title{Importing data from KoboToolBox (even Humanitarian)}
+\title{Fetching data from KoboToolBox using API (even Humanitarian)}
 \usage{
 koboimport(servername, formid, username, password)
 }

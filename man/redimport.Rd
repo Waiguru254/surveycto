@@ -2,7 +2,7 @@
 % Please edit documentation in R/redimport.R
 \name{redimport}
 \alias{redimport}
-\title{Fetching data from Project's RedCap server}
+\title{Fetching data from Project's RedCap server using API}
 \usage{
 redimport(token, url)
 }
@@ -17,7 +17,7 @@ This function uses the token to fetch data using API.}
 
 }
 \description{
-Fetching data from Project's RedCap server
+Fetching data from Project's RedCap server using API
 }
 \examples{
 ###NOT RUN

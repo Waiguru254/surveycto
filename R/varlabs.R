@@ -1,4 +1,4 @@
-#' Compile Variable labels into data.frame =
+#' Compile Variable (Column label) labels into data.frame.
 #'
 #' @param xlsform  Lastest XLSForm used to collect data.
 #'

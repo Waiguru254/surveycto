@@ -1,7 +1,7 @@
 
     ### Importing data function
 
-#' Fetching Data from SurveyCTO server
+#' Fetching Data from SurveyCTO server usin API.
 #'
 #'
 #' The function fetch data from surveycto server using formid, which is a form

@@ -2,7 +2,7 @@
 % Please edit documentation in R/varlabs.R
 \name{varlabs}
 \alias{varlabs}
-\title{Compile Variable labels into data.frame =}
+\title{Compile Variable (Column label) labels into data.frame.}
 \usage{
 varlabs(xlsform)
 }
@@ -13,7 +13,7 @@ varlabs(xlsform)
 
 }
 \description{
-Compile Variable labels into data.frame =
+Compile Variable (Column label) labels into data.frame.
 }
 \examples{
 NOT RUN

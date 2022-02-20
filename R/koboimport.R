@@ -1,6 +1,6 @@
 ### Importing data function
 #'
-#'Importing data from KoboToolBox (even Humanitarian)
+#'Fetching data from KoboToolBox using API (even Humanitarian)
 #'
 #'
 #'KoBoToolBox provides a suites of tools to collect data in challenging
