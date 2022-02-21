@@ -35,7 +35,6 @@ tabmult<- function(row, column,data,valuelabel=NULL) {
       }
     }
     ##ADDING variable label if they exist
-
     ###Adding value llabel
     if (!is.null(valuelabel)) {
       vls<- valuelabel[valuelabel[,1]==paste(row,"_vlab",sep=""),]

@@ -4,21 +4,27 @@
 \alias{rodkval}
 \title{Generates a Script to add single variable value labels.}
 \usage{
-rodkval(xlsform, dataName)
+rodkval(xlsform, dataName, language = "")
 }
 \arguments{
 \item{xlsform}{Latest XLSFORM used to collect the data.}
 
-\item{dataName}{name of the data, which was collected using the XLSFORM
+\item{dataName}{Use the name used to save the data, in R memory, collected
+                using the XLS-form stated above.
 stated above.}
+
+\item{language}{Enter the language to be used in value labelling.
+If the language is not provided, the most left label
+column will be used to generate the value label script.
+For example, language="English".}
 }
 \value{
 
 }
 \description{
-Generates a Script to add single variable value labels.
+The function uses expss package to label data.
 }
 \examples{
 NOT run
-rodkmult(xlsforn,'dataName')
+rodkmult(xlsforn,'dataName','English')
 }
