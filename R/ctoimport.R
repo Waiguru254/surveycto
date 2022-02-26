@@ -18,6 +18,12 @@
 #'                    data.
 #' @param language    This determines that labels language to be used to label
 #'                     the data.
+#'
+#'
+#' @return
+#' @export
+#'
+#'@examples
 #'  ## NOT RUN
 #'  ctoimport(Sys.getenv("servername"),'VAVS_CRF_03',Sys.getenv("username"),Sys.getenv("password"))
 

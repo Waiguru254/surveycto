@@ -28,11 +28,16 @@ password in a plain text in your script. Employ it in}
 data.}
 
 \item{language}{This determines that labels language to be used to label
-                   the data.
-## NOT RUN
-ctoimport(Sys.getenv("servername"),'VAVS_CRF_03',Sys.getenv("username"),Sys.getenv("password"))}
+the data.}
+}
+\value{
+
 }
 \description{
 The function fetch data from surveycto server using formid, which is a form
 identifier. It imports data in .csv format, without repeat group data.
+}
+\examples{
+ ## NOT RUN
+ ctoimport(Sys.getenv("servername"),'VAVS_CRF_03',Sys.getenv("username"),Sys.getenv("password"))
 }
