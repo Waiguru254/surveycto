@@ -228,9 +228,9 @@
       ### Creating an R script folder in the working directory
       ifelse(!dir.exists(file.path('./', 'Scripts')), dir.create(file.path('./','Scripts')), FALSE)
       ###Writing the value label script
-      var_script<- paste('./Scripts',stringr::str_replace_all(form_id, "[[:punct:]]", ""),"Variables Labels.R",sep="")
+      var_script<- paste('./Scripts/',stringr::str_replace_all(form_id, "[[:punct:]]", "")," Variables Labels.R",sep="")
 
-      val_script<- paste('./Scripts/',stringr::str_replace_all(form_id, "[[:punct:]]", ""),"Value Labels.R",sep="")
+      val_script<- paste('./Scripts/',stringr::str_replace_all(form_id, "[[:punct:]]", "")," Value Labels.R",sep="")
 
       writeLines(as.character(survey_processed$val_labs),val_script)
 
