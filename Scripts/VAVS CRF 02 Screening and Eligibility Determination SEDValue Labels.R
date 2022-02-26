@@ -1,0 +1,8 @@
+suppressWarnings(try(data <- expss::apply_labels(data, dcd_correct_detail=c("Yes" = 1,"No" = 0)), silent=TRUE))
+suppressWarnings(try(data <- expss::apply_labels(data, correct_dcd_dtails=c("Name" = 1,"Date of Death" = 2,"Deceased Sex" = 3,"Facility" = 4,"Age" = 5)), silent=TRUE))
+suppressWarnings(try(data <- expss::apply_labels(data, correct_sex=c("Male" = 1,"Female" = 2)), silent=TRUE))
+suppressWarnings(try(data <- expss::apply_labels(data, correct_detail=c("Yes" = 1,"No" = 0)), silent=TRUE))
+suppressWarnings(try(data <- expss::apply_labels(data, why_no_consent=c("Religious considerations" = 1,"Privacy concerns" = 2,"Timing concerns" = 3,"Distrust" = 4,"Family disinterest" = 5,"Body not available" = 6,"Consent authorization issues" = 7,"Study procedures prohibitive" = 8,"Refusal without reason" = 9)), silent=TRUE))
+suppressWarnings(try(data <- expss::apply_labels(data, nature_dth=c("Yes" = 1,"No" = 0)), silent=TRUE))
+suppressWarnings(try(data <- expss::apply_labels(data, lgstclly_accss=c("Yes" = 1,"No" = 0,"Unknown" = 2)), silent=TRUE))
+suppressWarnings(try(data <- expss::apply_labels(data, why_nt_elegible=c("Late notification (no longer eligible for COVID19 test)" = 1,"Body already buried or cremated" = 2,"Family wishes to bury body before eligibility screening can be conducted" = 3,"Logisitical and/or VA staff availability issues" = 4,"Consenting party not available" = 5,"Complex family dynamics or emotional distress" = 6,"Local social/cultural concerns" = 7,"Does not meet age requirement" = 8)), silent=TRUE))

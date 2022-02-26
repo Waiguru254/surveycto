@@ -4,13 +4,13 @@
 \alias{rodkvar}
 \title{Generates Rscript to add variable labels}
 \usage{
-rodkvar(xlsform, dataName)
+rodkvar(dataName = "", language = "")
 }
 \arguments{
-\item{xlsform}{Latest XLSFORM used to collect data.}
-
 \item{dataName}{name given to the data.frame collected using the XLSFORM
 stated}
+
+\item{xlsform}{Latest XLSFORM used to collect data.}
 }
 \value{
 

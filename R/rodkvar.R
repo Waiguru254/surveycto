@@ -10,15 +10,29 @@
 #' @examples
 #' Not run
 #' rodkvar(xlsforn,'dataName')
-rodkvar<- function(xlsform,dataName) {
+rodkvar<- function(dataName='',language='') {
   suppressMessages(library(dplyr))
+
+  ### Evaluating the language selected
+  if (language!="") {
+    var_lab_langs=lab_var(language)
+  } else {
+    var_lab_langs=lab_var('')
+  }
+
+
+  ### If dataname is missing
+  if (dataName==""){
+    dataName='data'
+  }
+
   ###Extracting the XLSFORM path
-  file_xls<-dirname(xlsform)
-  labfile<- basename(xlsform)
   ################################   survey   ################################
-  survey <- as.data.frame(xlsx::read.xlsx2(xlsform,sheetName='survey'))%>%
-    dplyr:: select(type,name,label)%>%
-    filter(grepl('select_one|select_multiple|integer|text|calculate',type))%>%   ###Filtering variables that need value labels
+  survey <- survey %>%
+    dplyr:: select(type,name,c(var_lab_langs))
+    colnames(survey)[grepl(c(var_lab_langs),colnames(survey))]<-'label'
+    print(names(survey))
+    survey<- survey %>% filter(grepl('select_one|select_multiple|integer|text|calculate|decimal|date|geopoint',type))%>%   ###Filtering variables that need value labels
     mutate(type= trimws(gsub("select_one","",
                              gsub("select_multiple","",
                                   gsub("'", "",gsub("\"", "",
@@ -27,13 +41,21 @@ rodkvar<- function(xlsform,dataName) {
                                         gsub("select_multiple","",
                                              gsub("'", "",gsub("\"", "",
                                                                gsub("(?<=[\\s])\\s*|^\\s+|\\s+$", "",label, perl=TRUE)))))),
-           var_labels=paste(name,"=\"",str_replace_all(label, "[[:punct:]]", " "),"\")",sep=""))%>%
-    mutate(var_labeeds=paste(dataName," <- expss::apply_labels(",dataName,",",var_labels,sep="")) %>%
+           var_labels=paste(gsub('-','',name),"=\"",stringr::str_replace_all(label, "[[:punct:]]", ""),"\")",sep=""))%>%
+    mutate(var_labeeds=paste('tryCatch(',dataName," <- expss::apply_labels(",dataName,",",var_labels,')',sep="")) %>%
     dplyr:: select(var_labeeds)
-  varlabeld<- paste(paste(file_xls,"/",sep=''),"ODK ",tools::file_path_sans_ext(labfile),"Variables Labels.R",sep=" ")
-  writeLines(as.character(survey$var_labeeds),varlabeld)
-  # for (i in 1:nrow(survey)){
-  #   eval(parse(text=paste(survey$var_labeeds[i],sep="")), envir=.GlobalEnv)
-  # }
-  # varnolabel<-warnings()
+  var_script<- paste(stringr::str_replace_all(form_id, "[[:punct:]]", ""),"Variables Labels.R",sep=" ")
+  writeLines(as.character(survey$var_labeeds),var_script)
+
 }
+
+
+
+
+lab_var<- function (language) {
+  lab_vars<- names(survey)[min(which(grepl(paste0('label::',language,sep=''),
+                                           gsub(' ','',names(survey)))),na.rm=TRUE)]
+  return(lab_vars)
+}
+
+

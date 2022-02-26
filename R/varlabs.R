@@ -19,7 +19,6 @@ varlabs<- function(xlsform) {
   ###Setting the directory to save the scripts and the basename of the electronic survey.
   survey <- as.data.frame(xlsx::read.xlsx2(xlsform,sheetName='survey'))%>%
     filter(grepl('select_multiple|select_one|integer|text|calculate',type)) %>%
-    dplyr:: select(name, label)%>%
     dplyr:: select(name, label) %>%
     filter(label!= "" )%>%
     na_if("") %>%

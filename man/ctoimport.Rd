@@ -4,7 +4,14 @@
 \alias{ctoimport}
 \title{Fetching Data from SurveyCTO server usin API.}
 \usage{
-ctoimport(servername, formid, username, password)
+ctoimport(
+  servername,
+  formid,
+  username,
+  password,
+  dataName = NULL,
+  language = ""
+)
 }
 \arguments{
 \item{servername}{SurveyCTO servername}
@@ -15,16 +22,17 @@ the form definition in the server.}
 \item{username}{SurveyCTO username, without including  the .survecto.com}
 
 \item{password}{SurveyCTO password, it is encouraged not to put the
-password in a plain text in your script. Employ it in
- .Renviron files to hide your passwords.}
-}
-\value{
+password in a plain text in your script. Employ it in}
 
+\item{dataName}{Name of the data to be stored in R memory, default is
+data.}
+
+\item{language}{This determines that labels language to be used to label
+                   the data.
+## NOT RUN
+ctoimport(Sys.getenv("servername"),'VAVS_CRF_03',Sys.getenv("username"),Sys.getenv("password"))}
 }
 \description{
 The function fetch data from surveycto server using formid, which is a form
 identifier. It imports data in .csv format, without repeat group data.
-}
-\examples{
-ctoimport('servername','formid','username','password')
 }
