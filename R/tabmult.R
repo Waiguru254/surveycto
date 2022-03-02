@@ -44,7 +44,7 @@ tabmult<- function(row, column,data) {
     tabs<- tabs %>%select(-c("Row.names"))%>% na.omit(Overall) %>% rename(Labels=x)
     rownames(tabs)<-NULL
     ### Ordering on asceind order
-    tabs<- tabs %>% mutate(arrnge=sub("\\(.*", "", Overall))%>%arrange(desc(arrnge))
+    tabs<- tabs %>% mutate(arrnge=sub("\\(.*", "", Overall))%>%arrange(desc(arrnge)) %>% select(-c(arrnge))
     print(tabs)
     tabs<-rbind(c(NA),tabs)
     tabs[1,1]<- expss::var_lab(data%>% select(row))
