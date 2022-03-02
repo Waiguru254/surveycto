@@ -2,7 +2,6 @@
 #' @param row Multiple-select variable
 #' @param column Group by variable
 #' @param data  data with multiple select variable
-#' @param valuelabel  The is a dataset conataining value labels from XLSFROM (generated using rodkmultlas )
 #'
 #' @return
 #' @export
@@ -10,11 +9,11 @@
 #' @examples
 #' tabmmult('row','column','data','valuelabel')
 #'
-tabmult<- function(row, column,data,valuelabel=NULL) {
+tabmult<- function(row, column,data) {
   suppressMessages(library(dplyr))
     dof<- data %>%
-      filter(!is.na({row})) %>%
-      filter(!is.na({column}))%>%
+      filter(!is.na(as.character({row}))) %>%
+      filter(!is.na(as.character({column})))%>%
       dplyr::select({row},{column})
     rr<-sort(as.numeric(unique(scan(text=dof[,1], what="", sep=" ",quiet =TRUE))))
     mat<- matrix(NA,length(rr),length(unique(na.omit(dof[,2])))+1)
@@ -34,29 +33,24 @@ tabmult<- function(row, column,data,valuelabel=NULL) {
                                                                                                                                paste(" ",dof[,1]," ",sep="")))/length(is.na(dof[,1])))*100,1), "%)",sep = "")
       }
     }
-    ##ADDING variable label if they exist
-    ###Adding value llabel
-    if (!is.null(valuelabel)) {
-      vls<- valuelabel[valuelabel[,1]==paste(row,"_vlab",sep=""),]
-      rownames(vls)<-vls[,"value"]
-      mat<- merge(vls,mat,by="row.names",all.x=TRUE) %>% dplyr:: select(-c(Row.names,value)) %>%
-        filter(!is.na(Overall)) %>%
-        mutate(Label=name) %>%
-        dplyr:: select(-c(name,variable))%>%
-        dplyr::select(Label,everything())
-      VV<-matrix(NA,1,length(unique(na.omit(dof[,2])))+2)
-      rownames(VV)<-c("Label")
-      colnames(VV)<- c("Label",dd)
-      mat<-rbind(VV,mat)
-      mat[1,"Label"]<- g
-      rownames(mat)<- mat[,"Label"]
-      mat <- mat %>% dplyr::select(-Label)
-      colnames(mat)<-c(row2col,"Overall")
-      return(as.data.frame(mat))
-    } else {
-      colnames(mat)<-row2col
-      return(as.data.frame(mat))
+   ### Using the label in the data to label the multiple select tabulation
+   ### table
+    xx<-expss::val_lab(dof[,1])
+    cc <- rbind(names(xx), xx) %>%t()
+    rownames(cc)<-NULL
+    rownames(cc)<- cc[,2]
+    cc<- cc[,-2]
+    tabs <- merge(cc,mat, by=0, all=TRUE)
+    tabs<- tabs %>%select(-c("Row.names"))%>% na.omit(Overall) %>% rename(Labels=x)
+    rownames(tabs)<-NULL
+    ### Ordering on asceind order
+    tabs<- tabs %>% mutate(arrnge=sub("\\(.*", "", Overall))%>%arrange(desc(arrnge))
+    print(tabs)
+    tabs<-rbind(c(NA),tabs)
+    tabs[1,1]<- expss::var_lab(data%>% select(row))
+
+      return(as.data.frame(tabs))
     }
-  }
+
 
 

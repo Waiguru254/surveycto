@@ -4,7 +4,7 @@
 \alias{tabmult}
 \title{The function generate proportion from a multiple-select variable}
 \usage{
-tabmult(row, column, data, valuelabel = NULL)
+tabmult(row, column, data)
 }
 \arguments{
 \item{row}{Multiple-select variable}
@@ -12,8 +12,6 @@ tabmult(row, column, data, valuelabel = NULL)
 \item{column}{Group by variable}
 
 \item{data}{data with multiple select variable}
-
-\item{valuelabel}{The is a dataset conataining value labels from XLSFROM (generated using rodkmultlas )}
 }
 \value{
 

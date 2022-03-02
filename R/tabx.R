@@ -10,6 +10,12 @@
 #' @examples
 #' tabx('row','column','data')
 tabx <- function(row,column,data) {
+  ###Function adding variables that do not exist
+  addcols <- function(data, cname) {
+    add <-cname[!cname%in%names(data)]
+    if(length(add)!=0) data[add] <- NA
+    return(data)
+  }
   suppressMessages(library(dplyr))
   dof<- addcols(data,{row}) %>%
     dplyr::select({row},{column})
@@ -29,20 +35,12 @@ tabx <- function(row,column,data) {
   #colnames
   cnames<-colnames(tab)
   colnames(cpercent) <- cnames
-  #rownames
-  rnames <- rownames(cpercent)
-  l<-c()
-  for (k in rnames ){
-    vls<- sing_value_label[sing_value_label[,1]==paste(row,"_vlab",sep="") & sing_value_label[,3]==k,]
-    l[[k]]<- vls[,2]
-  }
-  rnames<-suppressWarnings(do.call(dplyr::bind_rows,l))
-  #rnames <- rownames(cpercent)
-  cpercent<-rbind(matrix('',1,ncol(cpercent)),cpercent)
-  if (is.null(attr(dof[,1],"label"))){g=row} else {g=attr(dof[,1],"label")}
-  rnames<- c(g,rnames)
-  rownames(cpercent) <- rnames
-  tabx<-data.table(cpercent,keep.rownames=TRUE)
+  cpercent<-cbind(rownames(cpercent),cpercent)
+  colnames(cpercent) <- c('Labels',cnames)
+  rownames(cpercent)<-NULL
+  cpercent<-rbind(c(NA),cpercent)
+  cpercent[1,1]<- expss::var_lab(dof%>% select(row))
   return(cpercent)
+
 }
 
