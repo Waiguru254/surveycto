@@ -129,7 +129,7 @@ surveyImport<- function (servername,formid, username,password, language="",dataN
   ### Importing survey sheet to merge with choices
   ### only remain with single select variables
 
-  var_lab_list<- survey %>%
+  var_lab_list<- as.data.frame(survey) %>%
     dplyr:: select(name,type)%>%
     filter(grepl('select_one|select_multiple',type))%>%
     mutate(type=trimws(gsub("select_one|select_multiple","",type)))%>%
@@ -138,8 +138,25 @@ surveyImport<- function (servername,formid, username,password, language="",dataN
     dplyr:: select(type,name.x,name.y,label_rawd) %>%
     filter(!is.na(name.y))
     colnames(var_lab_list)<- c('type',"var_name",'name','label')
+    ########################################################################################################################
+    #For single select variables
+    ###Extracting the XLSFORM path
+    ###Including multiple variables
+    ###Setting the directory to save the scripts and the basename of the electronic survey.
+    keep.cols <- names(survey) %in% c("")
+    survey <- survey[! keep.cols]
+    varlabel <- as.data.frame(survey)  %>%
+      filter(grepl('select_multiple|select_one|integer|text|calculate|decimal',type)) %>%
+      dplyr:: select(name,label_rawd)%>%
+      mutate(labels=paste('[',name,'] ',gsub('<[^>]+>','',gsub("select_one","",
+                                                               gsub("select_multiple","",
+                                                                    gsub("'", "",gsub("\"", "",
+                                                                                      gsub("(?<=[\\s])\\s*|^\\s+|\\s+$", "",label_rawd, perl=TRUE)))))),sep = ''))%>%
+      dplyr:: select(labels) %>% filter(labels!=" ")
+
   ### Retrun th elist of data.frame
-  return(list(choices,survey,form_id,var_type,var_lab_list))
+  return(list(choices,survey,form_id,var_type,var_lab_list,varlabel))
+
 
 }
 #

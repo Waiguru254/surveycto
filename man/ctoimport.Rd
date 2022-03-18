@@ -2,7 +2,7 @@
 % Please edit documentation in R/ctoimport.R
 \name{ctoimport}
 \alias{ctoimport}
-\title{Fetching Data from SurveyCTO server usin API.}
+\title{Fetching Data from SurveyCTO server using API.}
 \usage{
 ctoimport(
   servername,
