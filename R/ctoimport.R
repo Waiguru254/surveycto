@@ -1,7 +1,7 @@
 
     ### Importing data function
 
-#' Fetching Data from SurveyCTO server usin API.
+#' Fetching Data from SurveyCTO server using API.
 #'
 #'
 #' The function fetch data from surveycto server using formid, which is a form
@@ -76,13 +76,14 @@
       ###Fetching the data
 
       request <- httr::GET(paste("https://",servername, ".surveycto.com/api/v1/forms/data/csv/",formid,sep=''),
-                           httr::authenticate(username,password))
+                           config = httr::config(connecttimeout = 600000), httr::authenticate(username,password))
 
       ###Reading data using read.csv(), it makes into structured data.
 
       data <- read.csv (text = httr::content(request, "text"))
 
       ###Organize the data column names, organizing them by removing special characters
+      names<- c()
 
       names<- sub('.*\\.', '', sub('.*\\:', '', names(data)))
 
@@ -113,7 +114,7 @@
       request_survey<-c() ; data_cto<-c() ## Removing the chances of previous data
       url_survey<- paste("https://",servername, ".surveycto.com/forms/",formid,'/design/',sep='')
       ##print(url_survey)
-      request_survey<-httr::GET(url_survey,httr::authenticate(username,password,type="digest"))
+      request_survey<-httr::GET(url_survey,config = httr::config(connecttimeout = 600000),httr::authenticate(username,password,type="digest"))
 
       #retrieve the contents of a request as a character vector
 
