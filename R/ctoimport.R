@@ -240,10 +240,10 @@
       writeLines(as.character(survey_processd$var_labeeds),var_script)
 
       ###Adding the column value labels from the script
-      suppressWarnings(source(val_script,local = TRUE))
+      try(suppressWarnings(source(val_script,local = TRUE)), silent = T)
 
       ###Adding the column labels from the script
-      suppressWarnings(source(var_script,local = TRUE))
+      try(suppressWarnings(source(var_script,local = TRUE)), silent = T)
 
       ###Remove the var label script if stated
       #if (var.script.rm==TRUE) {
