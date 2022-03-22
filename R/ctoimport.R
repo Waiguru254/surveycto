@@ -76,7 +76,7 @@
       ###Fetching the data
 
       request <- httr::GET(paste("https://",servername, ".surveycto.com/api/v1/forms/data/csv/",formid,sep=''),
-                           config = httr::config(connecttimeout = 600000), httr::authenticate(username,password))
+                           config = httr::config(connecttimeout = 600000), progress(), httr::authenticate(username,password))
 
       ###Reading data using read.csv(), it makes into structured data.
 
@@ -114,7 +114,7 @@
       request_survey<-c() ; data_cto<-c() ## Removing the chances of previous data
       url_survey<- paste("https://",servername, ".surveycto.com/forms/",formid,'/design/',sep='')
       ##print(url_survey)
-      request_survey<-httr::GET(url_survey,config = httr::config(connecttimeout = 600000),httr::authenticate(username,password,type="digest"))
+      request_survey<-httr::GET(url_survey,config = httr::config(connecttimeout = 600000), progress(),httr::authenticate(username,password,type="digest"))
 
       #retrieve the contents of a request as a character vector
 

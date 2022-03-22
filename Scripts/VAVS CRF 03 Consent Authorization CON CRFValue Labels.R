@@ -1,5 +1,0 @@
-suppressWarnings(data <- expss::apply_labels(data, dcd_correct_detail=c("Yes" = 1,"No" = 0)))
-suppressWarnings(data <- expss::apply_labels(data, correct_detail=c("Yes" = 1,"No" = 0)))
-suppressWarnings(data <- expss::apply_labels(data, consented_test=c("Yes" = 1,"No" = 0)))
-suppressWarnings(data <- expss::apply_labels(data, consented_store=c("Yes" = 1,"No" = 0)))
-suppressWarnings(data <- expss::apply_labels(data, consented_va_inte=c("Yes" = 1,"No" = 0)))
