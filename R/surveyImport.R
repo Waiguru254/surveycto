@@ -103,7 +103,7 @@ surveyImport<- function (servername, formid, username, password, language = "",
               varlabel))
 }
 #
-library(surveycto)
+#library(surveycto)
 ##dd<-surveyImport(Sys.getenv("servername"),'VAVS_CRF_06',Sys.getenv("username"),Sys.getenv("password"))
 # choices<- dd[[1]] ### choices sheet in xlsform
 # survey<- dd[[2]] ### Survey shooice sheets in xlsform

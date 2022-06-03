@@ -1,6 +1,3 @@
-
-    ### Importing data function
-
 #' Fetching Data from SurveyCTO server using API.
 #'
 #'
