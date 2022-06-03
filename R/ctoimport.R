@@ -145,10 +145,10 @@
       ### Evaluating the language selected
       if (language=='') {
         lab_lang= names(survey)[min(which(grepl(paste0('label::','',sep=''),
-                                                               gsub(' ','',names(survey)))),na.rm=TRUE)]
+                               gsub(' ','',names(survey)))),na.rm=TRUE)]
       } else {
         lab_lang= names(survey)[min(which(grepl(paste0('label::',language,sep=''),
-                                                               gsub(' ','',names(survey)))),na.rm=TRUE)]
+                              gsub(' ','',names(survey)))),na.rm=TRUE)]
       }
 
 
