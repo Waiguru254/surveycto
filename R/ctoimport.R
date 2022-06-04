@@ -141,14 +141,17 @@
 
       ### Evaluating the language selected
       if (language=='') {
-         if (any(names(survey)=="label") {
-           lab_lang = names(survey)[min(which(names(survey)=='label'), na.rm = TRUE)]
+          if (any(names(survey)=="label") {
+                lab_lang = names(survey)[min(which(names(survey)=='label'), na.rm = TRUE)]
+           } else {
+                 lab_lang= names(survey)[min(which(grepl(paste0('label::',language,sep=''),
+                              gsub(' ','',names(survey)))),na.rm=TRUE)]
+              }
              } else {
                       lab_lang= names(survey)[min(which(grepl(paste0('label::',language,sep=''),
                               gsub(' ','',names(survey)))),na.rm=TRUE)]
              } 
-      }
-
+      
       ### If dataname is missing
       if (is.null(dataName)){
         dataName='data'
