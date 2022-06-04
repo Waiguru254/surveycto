@@ -141,7 +141,7 @@
 
       ### Evaluating the language selected
       if (language=='') {
-          if (any(names(survey)=="label") {
+          if (any(names(survey)=="label")) {
                 lab_lang = names(survey)[min(which(names(survey)=='label'), na.rm = TRUE)]
            } else {
                  lab_lang= names(survey)[min(which(grepl(paste0('label::',language,sep=''),
