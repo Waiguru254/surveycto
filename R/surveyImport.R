@@ -53,18 +53,20 @@ surveyImport<- function (servername, formid, username, password, language = "",
   survey <- as.data.frame(survey.raw) %>% `colnames<-`(.[1,
   ]) %>% .[-1, ]
   form_id <- data_form$settingsRowsAndColumns[2,1]
-  if (language == "") {
-
-    lab_lang = names(survey)[min(which(names(survey)=='label'), na.rm = TRUE)]
-
-
-  }
-  else {
-    lab_lang = names(survey)[min(which(grepl(paste0("label::",
-                                                    language, sep = ""), gsub(" ", "",
-                                                                              names(survey)))), na.rm = TRUE)]
-  }
-  colnames(survey)[grepl(c(lab_lang), colnames(survey))] <- "label_rawd"
+      # print(names(survey))
+      if (language=='') {
+          if (any(names(survey)=="label")) {
+                lab_lang = names(survey)[min(which(names(survey)=='label'), na.rm = TRUE)]
+           } else {
+                 lab_lang= names(survey)[min(which(grepl(paste0('label::',language,sep=''),
+                              gsub(' ','',names(survey)))),na.rm=TRUE)]
+              }
+             } else {
+                      lab_lang= names(survey)[min(which(grepl(paste0('label::',language,sep=''),
+                              gsub(' ','',names(survey)))),na.rm=TRUE)]
+             } 
+  
+  colnames(survey)[colnames(survey)==lab_lang] <- "label_rawd"
   colnames(choices)[grepl("list", colnames(choices))] <- "list.name"
   colnames(choices)[grepl(c(lab_lang), colnames(choices))] <- "label_rawd"
   var_type <- survey %>% dplyr::select(type, name, label_rawd) %>%
