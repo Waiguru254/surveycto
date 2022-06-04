@@ -140,6 +140,7 @@
 
 
       ### Evaluating the language selected
+        print(names(survey))
       if (language=='') {
           if (any(names(survey)=="label")) {
                 lab_lang = names(survey)[min(which(names(survey)=='label'), na.rm = TRUE)]
