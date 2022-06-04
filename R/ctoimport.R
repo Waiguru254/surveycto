@@ -168,7 +168,7 @@
 
       ################################   survey   ################################
 
-     colnames(survey)[grepl(c(lab_lang),colnames(survey))]<-'label_rawd'
+     colnames(survey)[colnames(survey)==lab_lang]<-'label_rawd'
 
      survey_processd <- survey %>%
      dplyr:: select(type,name,label_rawd)%>%
