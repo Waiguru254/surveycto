@@ -52,6 +52,9 @@ surveyImport<- function (servername, formid, username, password, language = "",
   survey.raw <- data_form$fieldsRowsAndColumns
   survey <- as.data.frame(survey.raw) %>% `colnames<-`(.[1,
   ]) %>% .[-1, ]
+  ### Dropping empty rows
+  survey <- survey %>% filter(type!="")
+  
   form_id <- data_form$settingsRowsAndColumns[2,1]
       # print(names(survey))
       if (language=='') {
