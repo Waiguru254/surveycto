@@ -60,17 +60,14 @@ surveyImport<- function (servername, formid, username, password, language = "",
       if (language=='') {
           if (any(names(survey)=="label")) {
                 lab_lang = names(survey)[min(which(names(survey)=='label'), na.rm = TRUE)]
-           } else {
+               } else {
                  lab_lang= names(survey)[min(which(grepl(paste0('label::',language,sep=''),
                               gsub(' ','',names(survey)))),na.rm=TRUE)]
               }
-             } else {
-                      lab_lang= names(survey)[min(which(grepl(paste0('label::',language,sep=''),
-                              gsub(' ','',names(survey)))),na.rm=TRUE)]
-             } 
-  
+       } 
+      
   colnames(survey)[colnames(survey)==lab_lang] <- "label_rawd"
-  colnames(choices)[grepl("list.|list_", colnames(choices))] <- "list.name"
+  #colnames(choices)[grepl("list.|list_", colnames(choices))] <- "list.name"
   #colnames(choices)[grepl(c(lab_lang), colnames(choices))] <- "label_rawd"
   var_type <- survey %>% dplyr::select(type, name, label_rawd) %>%
     filter(grepl("select_one|select_multiple|integer|text|calculate|decimal|time",
