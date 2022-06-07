@@ -67,7 +67,7 @@ surveyImport<- function (servername, formid, username, password, language = "",
        } 
   colnames(survey)[colnames(survey)==lab_lang]<-"label_rawd"
   colnames(choices)[grepl("list.", colnames(choices))] <- "list.name"
-     print(names(survey))
+  print(names(survey))
   var_type <- survey %>% dplyr::select(type, name, label_rawd) %>%
     filter(grepl("select_one|select_multiple|integer|text|calculate|decimal|time",
                  type)) %>% mutate(type = trimws(gsub("([A-z]+) .*",
