@@ -88,16 +88,16 @@ ctoimport<- function (servername,formid, username,password,dataName=NULL,dataStr
     data_text <- content(request, "text")
     #convert from JSON data to R object
     data <- jsonlite::fromJSON(data_text, flatten = TRUE)
-    ### Download long, without repeat group 
-    if (nrow(data)==0){
+
+  }
+      ### Download long, without repeat group 
+    if(nrow(data)==0){
       ###Fetching the data
       request <- httr::GET(paste("https://",servername, ".surveycto.com/api/v1/forms/data/csv/",formid,sep=''),
                            config = httr::config(connecttimeout = 600000), httr::progress(), httr::authenticate(username,password))
       ###Reading data using read.csv(), it makes into structured data.
       data <- read.csv (text = httr::content(request, "text")) 
     }
-  }
-  
   ###Organize the data column names, organizing them by removing special characters
   names<- c()
   
@@ -227,7 +227,7 @@ ctoimport<- function (servername,formid, username,password,dataName=NULL,dataStr
   colnames(choices)[grepl("list|list_|list.", colnames(choices))]<-'listname'
   ### Symbols to keep in choices labels
   keeps_labs <- c("+",'[',']','(',')',"?","_",'/')
-  print(names(choices))
+
   choiced<- choices %>%
     filter(!is.na(as.numeric(name)))
  # View(choiced)
@@ -245,8 +245,6 @@ ctoimport<- function (servername,formid, username,password,dataName=NULL,dataStr
 
   choices_processd$type<-choices_processd$listname
   choices_processed <- choices_processd %>% dplyr:: select(type,value_s)
-  View(choices_processed)
-
   ### Importing survey sheet to merge with choices
   ### only remain with single select variables
   
