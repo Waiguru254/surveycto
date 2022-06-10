@@ -194,10 +194,18 @@
 
       ################################   survey   ################################
 
-      ### Generating the single select columns.
-      colnames(choices)[grepl('list.',colnames(choices))] <- 'list.name'
-     colnames(choices)[grepl('list_',colnames(choices))] <- 'list.name'
-      colnames(choices)[colnames(choices)==lab_lang]<-'label_rawd'
+     ###Labels in choices tab 
+        if (language=='') {
+          if (any(names(choices)=="label")) {
+                lab_langc = names(choices)[min(which(names(choices)=='label'), na.rm = TRUE)]
+               } else {
+                 lab_langc= names(choices)[min(which(grepl(paste0('label::',language,sep=''),
+                              gsub(' ','',names(choices)))),na.rm=TRUE)]
+              }
+       } 
+ # colnames(survey)[colnames(survey)==lab_lang]<-"label_rawd"
+  colnames(choices)[colnames(choices)==lab_langc]<-"label_rawd"
+  colnames(choices)[grepl("list.", colnames(choices))] <- "list.name"
       ### Symbols to keep in choices labels
       keeps_labs <- c("+",'[',']','(',')',"?","_",'/')
 
