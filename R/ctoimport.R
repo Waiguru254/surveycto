@@ -127,7 +127,7 @@
       request_survey<-c() ; data_cto<-c() ## Removing the chances of previous data
       url_survey<- paste("https://",servername, ".surveycto.com/forms/",formid,'/design/',sep='')
       ##print(url_survey)
-      request_survey<-httr::GET(url_survey,config = httr::config(connecttimeout = 600000), progress(),httr::authenticate(username,password,type="digest"))
+      request_survey<-httr::GET(url_survey,config = httr::config(connecttimeout = 600000),httr::progress(),httr::authenticate(username,password,type="digest"))
 
       #retrieve the contents of a request as a character vector
 
