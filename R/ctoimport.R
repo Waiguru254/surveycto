@@ -239,10 +239,7 @@ ctoimport<- function (servername,formid, username,password,dataName=NULL,dataStr
   
   choices_procd<- choices_proc[,c("listname","value_s")]
 
-    choices_processd<- choices_procd %>%
-      dplyr::group_by(listname) %>%
-      dplyr::summarise(across(paste(., collapse = ", ")))
-
+  choices_processd<- aggregate(. ~ listname, choices_procd, paste, collapse = ", ")
   choices_processd$type<-choices_processd$listname
   choices_processed <- choices_processd %>% dplyr:: select(type,value_s)
   ### Importing survey sheet to merge with choices
