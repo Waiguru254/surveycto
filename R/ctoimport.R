@@ -74,6 +74,10 @@
       library(expss)
       library(httr)
       library(jsonlite)
+        suppressMessages(suppressWarnings(library(Hmisc)))
+        suppressMessages(suppressWarnings(library(expss)))
+        suppressMessages(suppressWarnings(library(httr)))
+        suppressMessages(suppressWarnings(library(jsonlite)))
     
         if(dataStru=='long') {
               ###Fetching the data
@@ -229,7 +233,7 @@
         mutate(value_s=paste(paste('\"',gsub(paste0(".*?($|'|", paste(paste0("\\",
                                                                              keeps_labs), collapse = "|"), "|[^[:punct:]]).*?"), "\\1", label_rawd),
                                    '\"', sep=""),name,sep = " = "))%>%
-        dplyr:: select(list.name, value_s) %>%
+        dplyr:: select(list.name,value_s) %>%
         group_by_at(vars(list.name)) %>%
         summarize_all(paste, collapse=",")
         choices_processed$type<- choices_processed$list.name
