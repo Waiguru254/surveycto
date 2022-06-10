@@ -15,7 +15,8 @@
 #'                    data.
 #' @param language    This determines that labels language to be used to label
 #'                     the data.
-#'
+#' @param dataStru    Whether the data is wide or long. default should be long.
+#'                    wide means it will include repeat groups. 
 #'
 #' @return
 #' @export
@@ -24,7 +25,7 @@
 #'  ## NOT RUN
 #'  ctoimport(Sys.getenv("servername"),'VAVS_CRF_03',Sys.getenv("username"),Sys.getenv("password"))
 
-    ctoimport<- function (servername,formid, username,password,dataName=NULL,language='') {
+    ctoimport<- function (servername,formid, username,password,dataName=NULL,dataStru='long',language='') {
       suppressMessages(library(dplyr))
       ### Check whether you are connected to the internet
 
@@ -70,15 +71,23 @@
       ###For surveycto we are fetching .csv data format, it is compact,
        ### multiple choice columns are not expanded.
 
-      ###Fetching the data
-
-      request <- httr::GET(paste("https://",servername, ".surveycto.com/api/v1/forms/data/csv/",formid,sep=''),
-                           config = httr::config(connecttimeout = 600000), progress(), httr::authenticate(username,password))
-
-      ###Reading data using read.csv(), it makes into structured data.
-
-      data <- read.csv (text = httr::content(request, "text"))
-
+    
+        if(dataStru=='long') {
+              ###Fetching the data
+            request <- httr::GET(paste("https://",servername, ".surveycto.com/api/v1/forms/data/csv/",formid,sep=''),
+                       config = httr::config(connecttimeout = 600000), progress(), httr::authenticate(username,password))
+               ###Reading data using read.csv(), it makes into structured data.
+                 data <- read.csv (text = httr::content(request, "text"))
+              } else if (dataStru=='wide') {
+                ### Streaming wide data 
+                request <-httr::GET(paste("https://",servername,".surveycto.com/api/v2/forms/data/wide/json/",formid,"?date=0",sep=""),
+                            config = httr::config(connecttimeout = 600000),username,password))
+                #retrieve the contents of a request as a character vector
+                data_text <- content(request, "text")
+                #convert from JSON data to R object
+                data <- jsonlite::fromJSON(data_text, flatten = TRUE)
+           }
+            
       ###Organize the data column names, organizing them by removing special characters
       names<- c()
 
