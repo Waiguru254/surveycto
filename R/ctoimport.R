@@ -213,7 +213,9 @@
               }
        } 
  # colnames(survey)[colnames(survey)==lab_lang]<-"label_rawd"
+   print(choices)
   colnames(choices)[colnames(choices)==lab_langc]<-"list.name"
+   print(choices)
  # colnames(choices)[grepl("list.", colnames(choices))] <- "list.name"
 
       ### Symbols to keep in choices labels
