@@ -70,7 +70,10 @@
       ### Construct a URL and fetch the data from surveycto server
       ###For surveycto we are fetching .csv data format, it is compact,
        ### multiple choice columns are not expanded.
-
+      library(Hmsic)
+      library(expss)
+      library(httr)
+      library(jsonlite)
     
         if(dataStru=='long') {
               ###Fetching the data
@@ -213,11 +216,9 @@
               }
        } 
  # colnames(survey)[colnames(survey)==lab_lang]<-"label_rawd"
-   print(choices)
   colnames(choices)[colnames(choices)==lab_langc]<-"label_rawd"
-   print(choices)
- colnames(choices)[grepl("list.|list_", colnames(choices))] <- "list.name"
-
+  colnames(choices)[grepl("list|list_|list.", colnames(choices))] <- "list.name"
+   print(names(choices))
       ### Symbols to keep in choices labels
       keeps_labs <- c("+",'[',']','(',')',"?","_",'/')
 
