@@ -78,7 +78,7 @@
                        config = httr::config(connecttimeout = 600000), httr::progress(), httr::authenticate(username,password))
                ###Reading data using read.csv(), it makes into structured data.
                  data <- read.csv (text = httr::content(request, "text"))
-              } else if (dataStru=='wide') {
+              } else {
                 ### Streaming wide data 
                 request <-httr::GET(paste("https://",servername,".surveycto.com/api/v2/forms/data/wide/json/",formid,"?date=0",sep=""),
                             config = httr::config(connecttimeout = 600000), httr::progress(),httr::authenticate(username,password))
