@@ -75,13 +75,13 @@
         if(dataStru=='long') {
               ###Fetching the data
             request <- httr::GET(paste("https://",servername, ".surveycto.com/api/v1/forms/data/csv/",formid,sep=''),
-                       config = httr::config(connecttimeout = 600000), progress(), httr::authenticate(username,password))
+                       config = httr::config(connecttimeout = 600000), httr::progress(), httr::authenticate(username,password))
                ###Reading data using read.csv(), it makes into structured data.
                  data <- read.csv (text = httr::content(request, "text"))
               } else if (dataStru=='wide') {
                 ### Streaming wide data 
                 request <-httr::GET(paste("https://",servername,".surveycto.com/api/v2/forms/data/wide/json/",formid,"?date=0",sep=""),
-                            config = httr::config(connecttimeout = 600000),username,password))
+                            config = httr::config(connecttimeout = 600000), httr::progress(),httr::authenticate(username,password))
                 #retrieve the contents of a request as a character vector
                 data_text <- content(request, "text")
                 #convert from JSON data to R object
