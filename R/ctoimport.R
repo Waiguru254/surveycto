@@ -232,6 +232,7 @@
         dplyr:: select(list.name,value_s) %>%
         group_by_at(vars(list.name)) %>%
         summarize_all(paste, collapse=",")
+        print(names(choices_processed))
         choices_processed$type<- choices_processed$list.name
 
       ### Importing survey sheet to merge with choices
