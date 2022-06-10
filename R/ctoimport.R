@@ -241,7 +241,7 @@ ctoimport<- function (servername,formid, username,password,dataName=NULL,dataStr
 
     choices_processd<- choices_procd %>%
       dplyr::group_by(listname) %>%
-      dplyr::summarise(across(funs(paste(., collapse = ", "))))
+      dplyr::summarise(across(paste(., collapse = ", ")))
 
   choices_processd$type<-choices_processd$listname
   choices_processed <- choices_processd %>% dplyr:: select(type,value_s)
