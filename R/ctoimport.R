@@ -217,16 +217,16 @@
        } 
  # colnames(survey)[colnames(survey)==lab_lang]<-"label_rawd"
   colnames(choices)[colnames(choices)==lab_langc]<-"label_rawd"
-  colnames(choices)[grepl("list|list_|list.", colnames(choices))] <- "list.name"
+  colnames(choices)[grepl("list|list_|list.", colnames(choices))]<-'ist.name'
    ### Symbols to keep in choices labels
       keeps_labs <- c("+",'[',']','(',')',"?","_",'/')
-
+      print(names(choices))
       choices_processed <- choices %>%
         #filter(grepl("^-[0-9]$",name, perl = T))%>%
-       # filter(!is.na(as.numeric(name)))%>%
+       #filter(!is.na(as.numeric(name)))%>%
         na.omit(name)%>%
         mutate(value_s=paste(paste('\"',gsub(paste0(".*?($|'|", paste(paste0("\\",
-                                                                             keeps_labs), collapse = "|"), "|[^[:punct:]]).*?"), "\\1", label_rawd),
+                      keeps_labs), collapse = "|"), "|[^[:punct:]]).*?"), "\\1", label_rawd),
                                    '\"', sep=""),name,sep = " = "))%>%
         dplyr::select(list.name,value_s) %>%
         group_by_at(vars(list.name)) %>%
