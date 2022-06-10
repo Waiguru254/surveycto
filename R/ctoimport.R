@@ -70,7 +70,7 @@
       ### Construct a URL and fetch the data from surveycto server
       ###For surveycto we are fetching .csv data format, it is compact,
        ### multiple choice columns are not expanded.
-      library(Hmsic)
+      library(Hmisc)
       library(expss)
       library(httr)
       library(jsonlite)
