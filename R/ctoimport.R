@@ -227,11 +227,11 @@
         na.omit(name)%>%
         mutate(value_s=paste(paste('\"',gsub(paste0(".*?($|'|", paste(paste0("\\",
                       keeps_labs), collapse = "|"), "|[^[:punct:]]).*?"), "\\1", label_rawd),
-                                   '\"', sep=""),name,sep = " = "))%>%
+                                   '\"', sep=""),name,sep = " = "))
+        choices_processed <- choices_processed %>%
         dplyr::select(c('list.name','value_s') %>%
         group_by_at(vars('list.name')) %>%
         summarize_all(paste, collapse=",")
-        print(names(choices_processed))
         
         choices_processed$type=choices_processed$list.name
 
