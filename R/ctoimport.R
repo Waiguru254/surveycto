@@ -218,8 +218,7 @@
  # colnames(survey)[colnames(survey)==lab_lang]<-"label_rawd"
   colnames(choices)[colnames(choices)==lab_langc]<-"label_rawd"
   colnames(choices)[grepl("list|list_|list.", colnames(choices))] <- "list.name"
-   colnames(choices)<- gsub(" ","",names(choices))
-      ### Symbols to keep in choices labels
+   ### Symbols to keep in choices labels
       keeps_labs <- c("+",'[',']','(',')',"?","_",'/')
 
       choices_processed <- choices %>%
@@ -229,11 +228,12 @@
         mutate(value_s=paste(paste('\"',gsub(paste0(".*?($|'|", paste(paste0("\\",
                                                                              keeps_labs), collapse = "|"), "|[^[:punct:]]).*?"), "\\1", label_rawd),
                                    '\"', sep=""),name,sep = " = "))%>%
-        dplyr:: select(list.name,value_s) %>%
+        dplyr::select(list.name,value_s) %>%
         group_by_at(vars(list.name)) %>%
         summarize_all(paste, collapse=",")
-        print(names(choices_processed))%>%
-        rename(type=list.name)
+        print(names(choices_processed))
+        
+        choices_processed$type=choices_processed$list.name
 
       ### Importing survey sheet to merge with choices
       ### only remain with single select variables
