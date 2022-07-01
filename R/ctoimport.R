@@ -137,6 +137,7 @@
       ### Generating the single select columns.
      try(colnames(choices)[grepl('list.|list_|list_name',colnames(choices))] <- 'list.name',silent=TRUE)
       colnames(choices)[colnames(choices)==lab_lang]<-'label_rawd'
+        names(choices)
       ### Symbols to keep in choices labels
       keeps_labs <- c("+",'[',']','(',')',"?","_",'/')
       choices_processed <- choices %>%
