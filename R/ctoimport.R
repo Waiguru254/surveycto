@@ -63,7 +63,7 @@
           stop(paste("Invalid servername, formid, Username or password."), call. = FALSE)
         }
       ### Adding variable(s) names to the data
-      colnames(data)<-names
+      colnames(data)<-make.unique(names)
       ########################################################################################################################################
        ### Downloading the survey and form definition
       ########################################################################################################################################3
