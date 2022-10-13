@@ -115,6 +115,7 @@
      colnames(survey)[colnames(survey)==lab_lang]<-'label_rawd'
      survey_processd <- survey %>%
      dplyr:: select(type,name,label_rawd)%>%
+             setNames(make.names(names(.), unique = TRUE)) %>%  ## Making the colnames unique
               filter(grepl('select_one|select_multiple|integer|text|calculate|decimal|date|geopoint',type))%>%   ###Filtering variables that need value labels
                dplyr::mutate(type= trimws(gsub("select_one","",
                   gsub("select_multiple","",
@@ -141,6 +142,7 @@
       ### Symbols to keep in choices labels
       keeps_labs <- c("+",'[',']','(',')',"?","_",'/')
       choices_processed <- choices %>%
+        setNames(make.names(names(.), unique = TRUE)) %>%  ## Making the colnames unique
         #filter(grepl("^-[0-9]$",name, perl = T))%>%
        # filter(!is.na(as.numeric(name)))%>%
         na.omit(name)%>%
@@ -154,6 +156,7 @@
       ### Importing survey sheet to merge with choices
       ### only remain with single select variables
       survey_processed<- survey %>%
+        setNames(make.names(names(.), unique = TRUE)) %>%  ## Making the colnames unique
         dplyr:: select(name,type)%>%
         filter(grepl('select_one|select_multiple',type))%>%
         mutate(type=trimws(gsub("select_one|select_multiple","",type)))%>%
