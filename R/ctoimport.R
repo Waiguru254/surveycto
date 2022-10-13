@@ -51,8 +51,11 @@
       ###For surveycto we are fetching .csv data format, it is compact,
        ### multiple choice columns are not expanded.
       ###Fetching the data
+        library(dplyr)
+        library(jsonlite)
+        library(httr)
       request <- httr::GET(paste("https://",servername, ".surveycto.com/api/v1/forms/data/csv/",formid,sep=''),
-                           config = httr::config(connecttimeout = 600000), progress(), httr::authenticate(username,password))
+                           config = httr::config(connecttimeout = 600000), httr::progress(), httr::authenticate(username,password))
       ###Reading data using read.csv(), it makes into structured data.
       data <- read.csv (text = httr::content(request, "text"))
       ###Organize the data column names, organizing them by removing special characters
