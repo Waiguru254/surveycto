@@ -17,7 +17,7 @@
 #'  
 
 checkbox<- function(column,decimal=1) {
-
+require(dplyr)
 ### Make R to evaluate the column name with dollar  sign
 
 col_name <- deparse(substitute(column))
@@ -39,7 +39,7 @@ for (v in c(1:nrow(vals_b))) {
   ### Adding the number of times a valeu appear ina column
   vals_b[v,'N']<- sum(ifelse(grepl(paste(' ',vals_b[v,'Values_choice'],' ',sep=''),column),1,0),na.rm=TRUE)
   ### Divides the frequency with the N to get percentage
-  vals_b[v,'`%`']<- paste(round(vals_b[v,'N']/sum(ifelse(column!="  ",1,0))*100,decimal),"%", sep='')
+  vals_b[v,'`%`']<- paste(round(vals_b[v,'Freq']/sum(ifelse(column!="  ",1,0))*100,decimal),"%", sep='')
 }
 
 ### Remove the value label column
