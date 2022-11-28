@@ -33,7 +33,7 @@ vals_b<- cbind(row.names(labs),labs)
 row.names(vals_b)<- NULL
 
 ### Add the column labels
-colnames(vals_b)<- c('Labels', 'Values_choice')
+colnames(vals_b)<- c(col_name, 'Values_choice')
 ### Get the number of responses that had responses on the selected question
 NN<- sum(ifelse(column!="  ",1,0))
 ### Loop through the value labels are indcated in the value label box
