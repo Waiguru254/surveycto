@@ -186,7 +186,7 @@ redimport<- function (token, url, form_name) {
                                     col1<- paste(ColName,"1_vxzs",sep='')
                                     data_unite<- data %>%
                                     tidyr::unite(col1,starts_with(mul_colms),sep=' ',na.rm = TRUE, remove =remove) %>%
-                                    mutate({{ColName}}:=stringr::str_squish(paste(" ",col1," ",sep='')))
+                                    mutate({{ColName}}:=paste(stringr::str_squish(paste(" ",col1," ",sep='')),' ',sep=''))
                                     return(data_unite)
                             }
                             
