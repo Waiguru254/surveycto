@@ -17,7 +17,10 @@
 #'  
 
 checkbox<- function(column,decimal=1) {
-require(dplyr)
+suppressWarnings(suppressPackageStartupMessages({
+  library(knitr)
+  library(dplyr)
+}))
 ### Make R to evaluate the column name with dollar  sign
 
 col_name <- deparse(substitute(column))
