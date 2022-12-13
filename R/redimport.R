@@ -56,7 +56,7 @@ redimport<- function (token, url, form_name) {
                             fields = fields_collapsed
                       )
                       ### Downloading the data into R envrinment 
-                      raw_text <- httr::POST(url = url, body = post_body)
+                      raw_text <- httr::POST(url = url, body = post_body, config = httr::config(connecttimeout = 6e+05),progress())
                       data<- read.csv(text = httr::content(raw_text, "text"))
                       
                       #### Adding variable and value labels 
