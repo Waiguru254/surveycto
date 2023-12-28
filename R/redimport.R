@@ -33,12 +33,13 @@
 
 ### This make sure the columns are not collapsed and all the variables are imported
 redimport<- function (token, removecols = FALSE) {
-   library(stringr)
-   library(dplyr)
-   library(redcapAPI)
+  library(stringr)
+  library(dplyr)
+  library(redcapAPI)
   library(httr)
   library(jsonlite)
   library(crayon)
+  library(purrr)
   
   ### Universal url
   url <- "https://redcap.vetmed.wsu.edu/api/"
