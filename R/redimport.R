@@ -230,7 +230,7 @@ redimport<- function (token, removecols = FALSE) {
   try(suppressWarnings(source(var_check_script, local = TRUE)), silent = T)
   order_col<- c(redcap_dic$field_name)
   #print(order_col)
-  cols_on<- order_col[which(order_col %in% colnames(data) )]
+  cols_on <- order_col[which(order_col %in% colnames(data) )]
   
   # data <- data[,cols_on]
   #   as.data.frame()
@@ -246,6 +246,14 @@ redimport<- function (token, removecols = FALSE) {
       ))
     
   }
+  ### Ordering the columns as they are in the project dictionary
+  data <- data %>% 
+    select(
+           map(cols_on, ~ c(.x,names(data)[grep(paste0("^.x|^",.x), names(data))]) [1:length(names(data)[grep(paste0("^.x|^",.x), names(data))])]
+               
+           ) %>% unlist, 
+           everything())
+  
   
   data <- data %>% as.data.frame()
   try(suppressWarnings(source(val_script, local = TRUE)), silent = T)
