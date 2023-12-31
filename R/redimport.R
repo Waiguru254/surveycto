@@ -176,7 +176,7 @@ redimport<- function (token, removecols = FALSE) {
            variable_label=gsub("^[^,]*,", "", value)) %>%
     select(variable_name_1,variable_label)%>%
     dplyr:: mutate(variableLabels= paste(
-      "try(data <- expss::apply_labels(data,",variable_name_1,"=\"",variable_label,"\"), silent=TRUE)",sep="")) %>%
+      "try(data <- expss::apply_labels(data,",variable_name_1,"=\"",trimws(variable_label),"\"), silent=TRUE)",sep="")) %>%
     dplyr:: select(variableLabels)
   var_mul_script <- paste("./Scripts/",form_name, " CheckBox Variable Labels.R",
                           sep = "")
