@@ -39,7 +39,6 @@ redimport<- function (token, removecols = FALSE) {
   library(httr)
   library(jsonlite)
   library(crayon)
-  library(purrr)
   
   ### Universal url
   url <- "https://redcap.vetmed.wsu.edu/api/"
@@ -47,10 +46,10 @@ redimport<- function (token, removecols = FALSE) {
   ### This include the project info, name and project id.
   project_details <- function(token) {
     url <- "https://redcap.vetmed.wsu.edu/api/"
-    formData <- list("token"=token,
-                     content='project',
-                     format='json',
-                     returnFormat='json'
+    formData <- list("token" = token,
+                     content = 'project',
+                     format = 'json',
+                     returnFormat = 'json'
     )
     response <- httr::POST(url, body = formData, encode = "form")
     result <- httr::content(response)
@@ -62,7 +61,7 @@ redimport<- function (token, removecols = FALSE) {
   }
   ### this returns the project id and project name
   
-  form_name <- project_details(token)
+  form_name <- paste('PID',project_details(token))
   
   ### Suppressing the  warning from split function
   withr::local_options(.new = list(warn = -1))
@@ -95,9 +94,9 @@ redimport<- function (token, removecols = FALSE) {
   data_dictionary <-redcap_dic %>%
     janitor:: clean_names() %>%  ### Using janitor package to clean the column names 
     ### Removing rows without valeu labels 
-    filter(select_choices_or_calculations!='')%>% ## filteriing for columns or without choices, not needed in adding value labels
-    dplyr:: rename(choices=select_choices_or_calculations)%>%  ### Renaming the choices
-    dplyr:: rename(variable_label=field_label, variable_name=field_name) %>% ### Renaming the variable name
+    filter(select_choices_or_calculations != '')%>% ## filteriing for columns or without choices, not needed in adding value labels
+    dplyr:: rename(choices = select_choices_or_calculations)%>%  ### Renaming the choices
+    dplyr:: rename(variable_label = field_label, variable_name = field_name) %>% ### Renaming the variable name
     dplyr:: select(choices, variable_name,variable_label) %>% ### Selecting choices and variable names
     splitstackshape:: cSplit(.,"choices","|") %>% ### Splitting the choices and value labels
     #dplyr:: filter(!is.na(choices_01)) %>% ### Remove rows without any choices
@@ -107,14 +106,14 @@ redimport<- function (token, removecols = FALSE) {
     filter(!is.na(value) & !grepl("if",value)) %>% ### arranging the choices by variable name
     dplyr:: rename(value_choices=value) %>% ### Renaiming the variable for proper debugging
     dplyr:: filter(!is.na(value_choices)) %>% ### Remove if missing the first value/ choices
-    dplyr:: mutate(value_label=trimws(sub("^[^,]*,", "",value_choices)), ### Cleaning and removing spaces
-                   values=sub(',.*$','',value_choices)) %>% ### Extracting value label from the value _choices columns
+    dplyr:: mutate(value_label = trimws(sub("^[^,]*,", "",value_choices)), ### Cleaning and removing spaces
+                   values = sub(',.*$','',value_choices)) %>% ### Extracting value label from the value _choices columns
     dplyr:: select(-c(value_choices)) %>% ### Removing the coluns after cleaning
-    dplyr:: mutate(value_choice=paste("\"",value_label,"\"","=",values,sep=""))%>% ### Extracting the value from value_choices
+    dplyr:: mutate(value_choice = paste("\"",value_label,"\"","=",values,sep = ""))%>% ### Extracting the value from value_choices
     dplyr:: select(c(variable_name,value_choice)) %>%
     group_by(variable_name) %>%
-    mutate(id=1:n()) %>%
-    filter(id!=1) %>%
+    mutate(id = 1:n()) %>%
+    filter(id != 1) %>%
     ungroup()%>% ### Only remaining with  variable name and value choices
     dplyr:: group_by_at(vars(variable_name)) %>%  ### Group by variable name
     dplyr:: summarize_all(paste,collapse = ",") %>%  ### Collapse and separate by a comma
@@ -128,7 +127,7 @@ redimport<- function (token, removecols = FALSE) {
          dir.create(file.path("./", "Scripts")), FALSE)
   
   ### Creating the script path, creating a folder and adding the scripts
-  val_script <- paste("./Scripts/RedCap ",form_name, " Value Labels.R",sep = "")
+  val_script <- paste("./Scripts/",form_name, " Value Labels.R",sep = "")
   ### Exporting the scripts
   writeLines(as.character(data_dictionary$vlabels),val_script)
   
@@ -139,14 +138,14 @@ redimport<- function (token, removecols = FALSE) {
     dplyr::rename(variable_label=field_label)%>%
     dplyr::rename(variable_name=field_name)%>%
     dplyr:: select(variable_name,variable_label) %>%
-    dplyr:: mutate(variable_labels=trimws(gsub("<.*?>", "", variable_label))) %>%
+    dplyr:: mutate(variable_labels= trimws(gsub("<.*?>", "", variable_label))) %>%
     dplyr:: select(variable_name,variable_labels) %>%
     mutate(variable_labels=sub("'", '', variable_labels))%>%
     dplyr:: mutate(variableLabels= paste(
-      "try(data <- expss::apply_labels(data,",variable_name,"=\"",variable_labels,"\"), silent=TRUE)",sep="")) %>%
+      "try(data <- expss::apply_labels(data,",variable_name,"=\"",gsub('"','',variable_labels),"\"), silent=TRUE)",sep="")) %>%
     dplyr:: select(variableLabels)
   
-  var_script <- paste("./Scripts/RedCap ",form_name," Variable Labels.R",sep = "")
+  var_script <- paste("./Scripts/",form_name," Variable Labels.R",sep = "")
   
   ### Creating the script in the working directory within the script sub-folder
   writeLines(as.character(data_col$variableLabels),var_script)
@@ -179,7 +178,7 @@ redimport<- function (token, removecols = FALSE) {
     dplyr:: mutate(variableLabels= paste(
       "try(data <- expss::apply_labels(data,",variable_name_1,"=\"",variable_label,"\"), silent=TRUE)",sep="")) %>%
     dplyr:: select(variableLabels)
-  var_mul_script <- paste("./Scripts/RedCap ",form_name, " CheckBox Variable Labels.R",
+  var_mul_script <- paste("./Scripts/",form_name, " CheckBox Variable Labels.R",
                           sep = "")
   writeLines(as.character(data_mul$variableLabels),var_mul_script)
   
@@ -224,7 +223,7 @@ redimport<- function (token, removecols = FALSE) {
     xv<-paste("data<-odkshrink('",checkbox_col,"',data, remove = FALSE)",sep="")
   }
   
-  var_check_script <- paste("./Scripts/RedCap ",form_name, " Organizing CheckBox Variable.R",
+  var_check_script <- paste("./Scripts/",form_name, " Organizing CheckBox Variable.R",
                             sep = "")
   writeLines(as.character(xv),var_check_script)
   ### Ordering the columns as they are in the disctionary  
@@ -247,7 +246,7 @@ redimport<- function (token, removecols = FALSE) {
       ))
     
   }
-  ### Ordering the columns as they are in the project dictionary
+  
   data <- data %>% 
     select(
            map(cols_on, ~ c(.x,names(data)[grep(paste0("^.x|^",.x), names(data))]) [1:length(names(data)[grep(paste0("^.x|^",.x), names(data))])]
@@ -272,3 +271,4 @@ redimport<- function (token, removecols = FALSE) {
   
   
 }
+
