@@ -39,6 +39,7 @@ redimport<- function (token, removecols = FALSE) {
   library(httr)
   library(jsonlite)
   library(crayon)
+  library(purrr)
   
   ### Universal url
   url <- "https://redcap.vetmed.wsu.edu/api/"
