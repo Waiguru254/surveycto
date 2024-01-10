@@ -44,7 +44,7 @@ redimport<- function (token,API_url,removecols = FALSE) {
   library(purrr)
   url <- API_url
   ### This include the project info, name and project id.
-  project_details <- function(token, url) {
+  project_details <- function(token, url = url) {
      formData <- list("token" = token,
                      content = 'project',
                      format = 'json',
