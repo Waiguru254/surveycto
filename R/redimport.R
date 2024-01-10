@@ -60,7 +60,7 @@ redimport<- function (token,API_url,removecols = FALSE) {
   }
   ### this returns the project id and project name
   
-  form_name <- paste('PID',project_details(token))
+  form_name <- paste('PID',project_details(token, url = url))
   
   ### Suppressing the  warning from split function
   withr::local_options(.new = list(warn = -1))
