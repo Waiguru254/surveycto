@@ -4,6 +4,8 @@
 #'              This function uses the token to fetch data using API.
 #' @param removecols   This to indcate whether expanded checkbox columns 
 #'                     should be included in the dataset
+#' @param API_url   This is the API link to the Redcap database.  
+#'              For example https://redcap.****.wsu.edu/api/
 #'
 #'
 #' @return
@@ -32,7 +34,7 @@
 #  }
 
 ### This make sure the columns are not collapsed and all the variables are imported
-redimport<- function (token, removecols = FALSE) {
+redimport<- function (token,API_url,removecols = FALSE) {
   library(stringr)
   library(dplyr)
   library(redcapAPI)
@@ -40,14 +42,10 @@ redimport<- function (token, removecols = FALSE) {
   library(jsonlite)
   library(crayon)
   library(purrr)
-  
-  ### Universal url
-  url <- "https://redcap.vetmed.wsu.edu/api/"
-  
+  url <- API_url
   ### This include the project info, name and project id.
-  project_details <- function(token) {
-    url <- "https://redcap.vetmed.wsu.edu/api/"
-    formData <- list("token" = token,
+  project_details <- function(token, url) {
+     formData <- list("token" = token,
                      content = 'project',
                      format = 'json',
                      returnFormat = 'json'
