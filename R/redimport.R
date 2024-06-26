@@ -91,7 +91,7 @@ redimport<- function (token,url,removecols = FALSE) {
   redcap_dic<-   try(suppressWarnings(REDCapR::redcap_metadata_read(redcap_uri=url, token=token,verbose=FALSE)$data), silent = T)
   ### Generating Value label from codebook || Inlcude cleaning the codebook
   data_dictionary <-redcap_dic %>%
-    janitor:: clean_names() %>%  ### Using janitor package to clean the column names 
+    ###janitor:: clean_names() %>%  ### Using janitor package to clean the column names 
     ### Removing rows without valeu labels 
     filter(select_choices_or_calculations != '')%>% ## filteriing for columns or without choices, not needed in adding value labels
     dplyr:: rename(choices = select_choices_or_calculations)%>%  ### Renaming the choices
@@ -132,7 +132,7 @@ redimport<- function (token,url,removecols = FALSE) {
   
   ### Generating Variable labels from the codebook
   data_col <-  redcap_dic %>%
-    janitor:: clean_names() %>%
+     ##janitor:: clean_names() %>%
     filter(!grepl('descriptive',field_type))%>%
     dplyr::rename(variable_label=field_label)%>%
     dplyr::rename(variable_name=field_name)%>%
@@ -152,7 +152,7 @@ redimport<- function (token,url,removecols = FALSE) {
   
   #### Generating label for multiple choice question \
   data_mul <-redcap_dic %>%
-    janitor:: clean_names() %>%
+    ###janitor:: clean_names() %>%
     ### Removing rows without valeu labels 
     filter(select_choices_or_calculations!='')%>%
     dplyr:: rename(choices=select_choices_or_calculations)%>%  ### Renaming the choices
@@ -196,7 +196,7 @@ redimport<- function (token,url,removecols = FALSE) {
   
   #### Extracting the checkbox columns 
   checkbox_cols <- redcap_dic %>%
-    janitor:: clean_names() %>%
+   ### janitor:: clean_names() %>%
     ### Removing rows without valeu labels 
     filter(select_choices_or_calculations!='')%>%
     dplyr:: rename(choices=select_choices_or_calculations)%>%  ### Renaming the choices
